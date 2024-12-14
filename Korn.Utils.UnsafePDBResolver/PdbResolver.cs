@@ -2,11 +2,11 @@
 using System.Text;
 
 namespace Korn.Utils.UnsafePDBResolver;
-public unsafe class Pdb : IDisposable
+public unsafe class PdbResolver : IDisposable
 {
-    public Pdb(string path) : this(File.ReadAllBytes(path)) { }
+    public PdbResolver(string path) : this(File.ReadAllBytes(path)) { }
 
-    public Pdb(byte[] bytes)
+    public PdbResolver(byte[] bytes)
     {
         handle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
         Data = (byte*)handle.AddrOfPinnedObject();
@@ -17,10 +17,10 @@ public unsafe class Pdb : IDisposable
     public readonly byte* Data;
     public readonly int Length;
 
-    public unsafe FieldSymbol* UnsafeSearchField(string fieldName, string declaringType)
+    public unsafe FieldSymbol* ResolveField(string fieldName, string declaringType)
         => (FieldSymbol*)(Data + new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes($"?{fieldName}@{declaringType}@")) - 0x06);
 
-    public unsafe MethodSymbol* UnsafeSearchMethod(string methodName)
+    public unsafe MethodSymbol* ResolveMethod(string methodName)
         => (MethodSymbol*)(Data + new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes($"{methodName}\0")) - 0x07);
 
     bool disposed;
@@ -33,7 +33,7 @@ public unsafe class Pdb : IDisposable
         handle.Free();
     }
 
-    ~Pdb() => Dispose();
+    ~PdbResolver() => Dispose();
 }
 
 [StructLayout(LayoutKind.Sequential)]
