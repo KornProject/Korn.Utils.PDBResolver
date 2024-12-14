@@ -17,11 +17,19 @@ public unsafe class PdbResolver : IDisposable
     public readonly byte* Data;
     public readonly int Length;
 
-    public unsafe FieldSymbol* ResolveField(string fieldName, string declaringType)
-        => (FieldSymbol*)(Data + new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes($"?{fieldName}@{declaringType}@")) - 0x06);
+    public FieldSymbol* ResolveField(string fieldName, string declaringType) => ResolveField($"{fieldName}@{declaringType}");
 
-    public unsafe MethodSymbol* ResolveMethod(string methodName)
+    public FieldSymbol* ResolveField(string fieldName)
+        => (FieldSymbol*)(Data + new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes($"?{fieldName}@")) - 0x06);
+
+    public MethodSymbol* ResolveMethod(string methodName)
         => (MethodSymbol*)(Data + new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes($"{methodName}\0")) - 0x07);
+
+    public static string GetDebugSymbolsPathForExecutable(string executablePath)
+        => Path.Combine(Path.GetDirectoryName(executablePath)!, $"{Path.GetFileNameWithoutExtension(executablePath)}.pdb");
+
+    public static bool IsExecutableContainsDebugSymbols(string executablePath) 
+        => File.Exists(GetDebugSymbolsPathForExecutable(executablePath));
 
     bool disposed;
     public void Dispose()
