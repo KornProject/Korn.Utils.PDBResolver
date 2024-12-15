@@ -20,10 +20,30 @@ public unsafe class PdbResolver : IDisposable
     public FieldSymbol* ResolveField(string fieldName, string declaringType) => ResolveField($"{fieldName}@{declaringType}");
 
     public FieldSymbol* ResolveField(string fieldName)
-        => (FieldSymbol*)(Data + new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes($"?{fieldName}@")) - 0x06);
+    {
+        var index = new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes($"?{fieldName}@"));
+
+        if (index == -1)
+            throw new KornError([
+                "PdbResolver->ResolveField:",
+                $"Unable resolve field with name \"{fieldName}\"."
+            ]);
+
+        return (FieldSymbol*)(Data + index - 0x06);
+    }
 
     public MethodSymbol* ResolveMethod(string methodName)
-        => (MethodSymbol*)(Data + new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes($"{methodName}\0")) - 0x07);
+    {
+        var index = new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes($"{methodName}\0"));
+
+        if (index == -1)
+            throw new KornError([
+                "PdbResolver->ResolveMethod:", 
+                $"Unable resolve method with name \"{methodName}\"."
+            ]);
+        
+        return (MethodSymbol*)(Data + index - 0x07);
+    }
 
     public static string GetDebugSymbolsPathForExecutable(string executablePath)
         => Path.Combine(Path.GetDirectoryName(executablePath)!, $"{Path.GetFileNameWithoutExtension(executablePath)}.pdb");
