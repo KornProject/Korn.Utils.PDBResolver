@@ -17,32 +17,31 @@ public unsafe class PdbResolver : IDisposable
     public readonly byte* Data;
     public readonly int Length;
 
-    public FieldSymbol* ResolveField(string fieldName, string declaringType) => ResolveField($"{fieldName}@{declaringType}");
-
-    public FieldSymbol* ResolveField(string fieldName)
+    public SymbolFullName* Resolve(string name, string declaringType)
     {
-        var index = new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes($"?{fieldName}@"));
+        var searchString = $"?{name}@{declaringType}@";
+        var index = new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes(searchString));
 
         if (index == -1)
             throw new KornError([
-                "PdbResolver->ResolveField:",
-                $"Unable resolve field with name \"{fieldName}\"."
+                "PdbResolver->Resolve:",
+                $"Unable resolve full name \"{searchString}\"."
             ]);
 
-        return (FieldSymbol*)(Data + index - 0x06);
+        return (SymbolFullName*)(Data + index - 0x06);
     }
 
-    public MethodSymbol* ResolveMethod(string methodName)
+    public SymbolName* Resolve(string name)
     {
-        var index = new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes($"{methodName}\0"));
+        var index = new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes(name));
 
         if (index == -1)
             throw new KornError([
-                "PdbResolver->ResolveMethod:", 
-                $"Unable resolve method with name \"{methodName}\"."
+                "PdbResolver->Resolve:",
+                $"Unable resolve name \"{name}\"."
             ]);
-        
-        return (MethodSymbol*)(Data + index - 0x07);
+
+        return (SymbolName*)(Data + index - 0x07);
     }
 
     public static string GetDebugSymbolsPathForExecutable(string executablePath)
@@ -65,14 +64,14 @@ public unsafe class PdbResolver : IDisposable
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct FieldSymbol
+public unsafe struct SymbolFullName
 {
     public uint SegmentOffset;
     public ushort Segment;
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct MethodSymbol
+public unsafe struct SymbolName
 {
     public uint HeaderOffset;
 }
