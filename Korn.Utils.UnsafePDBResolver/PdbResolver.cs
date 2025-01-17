@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Korn.Utils.UnsafePDBResolver;
@@ -23,10 +25,10 @@ public unsafe class PdbResolver : IDisposable
         var index = new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes(searchString));
 
         if (index == -1)
-            throw new KornError([
+            throw new KornError(
                 "PdbResolver->Resolve:",
                 $"Unable resolve full name \"{searchString}\"."
-            ]);
+            );
 
         return (SymbolFullName*)(Data + index - 0x06);
     }
