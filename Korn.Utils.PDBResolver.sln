@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Utils.UnsafePDBResolver", "Korn.Utils.UnsafePDBResolver\Korn.Utils.UnsafePDBResolver.csproj", "{F8408D57-F8B8-4F60-9721-AA998F513B8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Utils.PDBResolver", "Korn.Utils.PDBResolver\Korn.Utils.PDBResolver.csproj", "{F8408D57-F8B8-4F60-9721-AA998F513B8E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Korn", "Korn", "{A1B51DA6-91DB-4E33-963A-E179A093D514}"
 EndProject
