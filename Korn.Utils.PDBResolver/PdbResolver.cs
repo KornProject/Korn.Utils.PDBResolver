@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Korn.Utils.UnsafePDBResolver;
+namespace Korn.Utils;
 public unsafe class PdbResolver : IDisposable
 {
     public PdbResolver(string path) : this(File.ReadAllBytes(path)) { }
