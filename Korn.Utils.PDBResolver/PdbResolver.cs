@@ -38,10 +38,10 @@ public unsafe class PdbResolver : IDisposable
         var index = new Span<byte>(Data, Length).IndexOf(Encoding.UTF8.GetBytes(name));
 
         if (index == -1)
-            throw new KornError([
+            throw new KornError(
                 "PdbResolver->Resolve:",
                 $"Unable resolve name \"{name}\"."
-            ]);
+            );
 
         return (SymbolName*)(Data + index - 0x07);
     }
