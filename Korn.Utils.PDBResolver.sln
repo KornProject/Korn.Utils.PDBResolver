@@ -7,15 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Utils.PDBResolver", "K
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Korn", "Korn", "{A1B51DA6-91DB-4E33-963A-E179A093D514}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Logger", "..\Korn.Logger\Korn.Logger\Korn.Logger.csproj", "{530225BD-D14F-4E55-83DC-752E71B65107}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Utils.System", "..\Korn.Utils.System\Korn.Utils.System\Korn.Utils.System.csproj", "{2238BD03-FC5A-4110-B9D0-3E7CAEED0C5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Shared", "..\Korn.Shared\Korn.Shared\Korn.Shared.csproj", "{1ADAE50D-CB81-427D-A746-D495B1711489}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Interface", "..\Korn.Interface\Korn.Interface\Korn.Interface.csproj", "{82068DA6-387B-4F4E-8F69-3804CAAC93D9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Shared.Internal", "..\Korn.Shared.Internal\Korn.Shared.Internal\Korn.Shared.Internal.csproj", "{5B091944-8A6B-46AA-A7FA-05386798D4CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Core", "..\Korn.Core\Korn.Core\Korn.Core.csproj", "{C4D11DDE-D717-4F18-8E75-DA1D092E1BF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,25 +18,16 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F8408D57-F8B8-4F60-9721-AA998F513B8E}.Debug|x64.ActiveCfg = Debug|x64
 		{F8408D57-F8B8-4F60-9721-AA998F513B8E}.Debug|x64.Build.0 = Debug|x64
-		{530225BD-D14F-4E55-83DC-752E71B65107}.Debug|x64.ActiveCfg = Debug|x64
-		{530225BD-D14F-4E55-83DC-752E71B65107}.Debug|x64.Build.0 = Debug|x64
 		{2238BD03-FC5A-4110-B9D0-3E7CAEED0C5D}.Debug|x64.ActiveCfg = Debug|x64
 		{2238BD03-FC5A-4110-B9D0-3E7CAEED0C5D}.Debug|x64.Build.0 = Debug|x64
-		{1ADAE50D-CB81-427D-A746-D495B1711489}.Debug|x64.ActiveCfg = Debug|x64
-		{1ADAE50D-CB81-427D-A746-D495B1711489}.Debug|x64.Build.0 = Debug|x64
-		{82068DA6-387B-4F4E-8F69-3804CAAC93D9}.Debug|x64.ActiveCfg = Debug|x64
-		{82068DA6-387B-4F4E-8F69-3804CAAC93D9}.Debug|x64.Build.0 = Debug|x64
-		{5B091944-8A6B-46AA-A7FA-05386798D4CC}.Debug|x64.ActiveCfg = Debug|x64
-		{5B091944-8A6B-46AA-A7FA-05386798D4CC}.Debug|x64.Build.0 = Debug|x64
+		{C4D11DDE-D717-4F18-8E75-DA1D092E1BF0}.Debug|x64.ActiveCfg = Debug|x64
+		{C4D11DDE-D717-4F18-8E75-DA1D092E1BF0}.Debug|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{530225BD-D14F-4E55-83DC-752E71B65107} = {A1B51DA6-91DB-4E33-963A-E179A093D514}
 		{2238BD03-FC5A-4110-B9D0-3E7CAEED0C5D} = {A1B51DA6-91DB-4E33-963A-E179A093D514}
-		{1ADAE50D-CB81-427D-A746-D495B1711489} = {A1B51DA6-91DB-4E33-963A-E179A093D514}
-		{82068DA6-387B-4F4E-8F69-3804CAAC93D9} = {A1B51DA6-91DB-4E33-963A-E179A093D514}
-		{5B091944-8A6B-46AA-A7FA-05386798D4CC} = {A1B51DA6-91DB-4E33-963A-E179A093D514}
+		{C4D11DDE-D717-4F18-8E75-DA1D092E1BF0} = {A1B51DA6-91DB-4E33-963A-E179A093D514}
 	EndGlobalSection
 EndGlobal
